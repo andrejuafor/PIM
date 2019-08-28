@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 <p align="center">
   <a href="http://mdbootstrap.com/docs/vue/">
@@ -205,3 +206,6 @@ A big ❤️ **thank you to all our users** ❤️ who are working with us to im
 
  - contact@mdbootstrap.com
 
+=======
+# PIM
+>>>>>>> 46919b4d21be44eddfcc82ad0e7ad7c327e6d418

@@ -25,10 +25,11 @@
         </div>
       </mdb-edge-header>
       <mdb-container>
+        <p class="mt-5 we-work-secction" ref="Who"></p>
         <mdb-row>
           <mdb-col md="6" class="we-are-secction mb-5">
             <h2 class="mt-5 font-weight-bold">¿Quiénes somos?</h2>
-            <p class="text-muted">Un servicio jurídico especializado en materia de Propiedad Intelectual, contando con una plataforma digital propia denomidana 
+            <p class="text-muted" >Un servicio jurídico especializado en materia de Propiedad Intelectual, contando con una plataforma digital propia denomidana 
               "PIM Propiedad Intelectual México" la cual ofrece el servicio que necesitas para la administración de tur Marcas. <br><br>
               Somos una integración de expertos, jurídicos y tecnologicos especializados en Propuedad Intelectual. Conformados por un equipo interno,
               con el respaldo de ELIAS & LONSSON Abogados y RECAUDIA.
@@ -42,7 +43,8 @@
             <img style="width: 100%; padding: 40px;" src="../../build/img/img-admin/pim landing page-17.png">
           </mdb-col>
         </mdb-row>
-        <mdb-row ref="serv">
+        <p class="mt-5 we-work-secction" ref="serv"></p>
+        <mdb-row>
           <mdb-col md="3" class="mb-5 text-center">
             <mdb-nav-item to="/servicios">
             <mdb-card class="animated fadeInLeft" style="width: 250px;"> 
@@ -77,6 +79,7 @@
             </mdb-nav-item>
           </mdb-col>
         </mdb-row>
+        <p class="mt-5 we-work-secction" ref="process"></p>
         <mdb-row>
           <mdb-col md="7" class="we-are-secction mb-5">
             <img style="width: 100%; padding-top: 100px;" src="../../build/img/img-admin/pim landing page-18.png">
@@ -97,7 +100,7 @@
             </mdb-nav-item>
           </mdb-col>
         </mdb-row>
-          <p class="mt-5 we-work-secction" ref="contact">Contacto</p>
+        <p class="mt-5 we-work-secction" ref="contact">Contacto</p>
         <mdb-row>
           <mdb-col md="4" class="mb-5 left-contact-info text-muted">
             <mdb-row>
@@ -168,8 +171,8 @@
               </section>
             </mdb-col>
           </mdb-row>
-        </mdb-container>
-      </div>
+      </mdb-container>
+    </div>
         <mdb-footer class="footer-section">
           <div class="form-row">
             <mdb-row class="footer-area">
@@ -214,6 +217,7 @@
 <script>
 import { mdbContainer, mdbCol, mdbRow, mdbInput, mdbIcon, mdbNavbar, mdbNavItem, mdbNavbarBrand, mdbNavbarNav, mdbNavbarToggler, mdbBtn, mdbEdgeHeader, mdbCard, mdbCardImage, mdbCardTitle, mdbCardText, mdbCardBody, animateOnScroll, mdbFooter } from 'mdbvue';
 import VueRecaptcha from 'vue-recaptcha';
+import axios from "axios";
 
 export default {
   name: 'HomePage',
@@ -266,17 +270,69 @@ export default {
     markRecaptchaAsVerified(response) {
       this.pleaseTickRecaptchaMessage = '';
       this.recaptchaVerified = true;
-      
-      console.log('ENVIADO');
     },
     checkIfRecaptchaVerified() {
       if (this.nameVerified === '' && this.emailVerified === '' && this.numberVerified === '' && this.campaignVerified === '' && this.messageVerified === ''){
         this.pleaseTickRecaptchaMessage = 'Por favor, llena todos los campos marcados';
       } else if (this.recaptchaVerified === false) {
-        this.pleaseTickRecaptchaMessage = 'Por favor, marca el CAPYCHA'; 
-        console.log(this.nameVerified);
+        this.pleaseTickRecaptchaMessage = 'Por favor, marca el CAPTCHA'; 
       } else {
+        let dataEnvia = {
+          collector: {
+            to: {
+              email: 'andy.jufa99@gmail.com',                            
+              nombre: 'Consultas PIM'
+            },
+            from:{
+              name: 'Consultas PIM',
+              email: this.emailVerified
+            },
+            subject: 'Consultas PIM',
+            html: `<!DOCTYPE html>
+        <html lang="en" dir="ltr">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+            <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+          </head>
+          <body>
+          <div style="font-family: arial,tahoma,verdana; color: #333333; font-size: 12px; background: #005B91; width: 100%!important; margin: 0; padding: 0" marginheight="0" marginwidth="0">
+        <center>
+            <table width="100%" height="100%" cellspacing="0" cellpadding="0" border="0" style="margin: 0; padding: 0;min-height: 100%!important;width: 100%!important">
+                <tr>
+                    <td valign="top" align="center" style="border-collapse: collapse">
+                        <table style="width: 900px" width="600" cellspacing="0" cellpadding="0" border="0">
+                            <tr>
+                                <td style="background: #ffffff; border-radius: 1px; border: solid 1px #DDDDDD; padding: 15px; color: #333333">
+                                    <table style="width: 100%" width="100%" cellspacing="0" cellpadding="0" border="0">
+                                        <!-- Contenedor principal -->
+                                        <div>
+                                            <h1>Consultas PIM</h1>
+                                            <p><strong>Nombre:</strong> ${this.nameVerified}</p>
+                                            <p><strong>Correo Electrónico: </strong>${this.emailVerified}</p>
+                                            <p><strong>Telefono: </strong> ${this.numberVerified}</p>
+                                            <p><strong>Campañia/Empresa: </strong>${this.campaignVerified}</p>
+                                            <p><strong>Mensaje:</strong></p>
+                                            <p>${this.messageVerified}</p>
+                                        </div>
+                                        <!-- Termina contenedor -->
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </center>
+      </div>
+      </body>
+      </html>`,
+            categoria_sendgrid: 'Mailing_PIM'
+          }
+        };
+        let tokenStr = 'U2VuZE1haWw6XiM1OHd2PUNRPVxAUFBVSA==';
         this.pleaseTickRecaptchaMessage = 'Mensaje enviado';
+        axios({ method: "POST", url: "https://sendmail.recaudia.com/SendMailApi/send", data: dataEnvia, headers:{'Content-Type': 'application/json', 'Authorization': `${tokenStr}`} });
       }
     }
   }
@@ -535,7 +591,7 @@ a {
     padding: 0px 50px 50px 50px;
   }
   .right-contact-section{
-    height: 700px;
+    height: 750px;
     width: 350px;
     top: -60px;
     -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.61);

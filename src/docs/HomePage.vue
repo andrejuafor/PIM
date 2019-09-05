@@ -1,6 +1,6 @@
 <template>
     <div style="margin-top: -15px">
-      <mdb-navbar id="main-navbar" color="white" position="top"  scrolling :scrollingOffset="20">
+      <mdb-navbar id="main-navbar" light color="white" position="top"  scrolling :scrollingOffset="20">
         <mdb-navbar-brand to="/" waves class="font-weight-bold">
           <img class="PIM-logo-navbar" src="../../build/img/img-admin/pim landing page-27.png">
         </mdb-navbar-brand>
@@ -551,6 +551,13 @@ a {
   margin:10px 10px 10px 90px;
 }
 
+  .span{
+    color: #000;
+  }
+  .navbar-toggler-icon{
+    background: #000000;
+  }
+
 @media (max-width: 767px) {
   .header-content{
     width: 100%;
@@ -650,6 +657,12 @@ a {
   font-weight: bold;
   padding: 5px;
 
-}
+  }
+  .span{
+    color: #000;
+  }
+  .navbar-toggler-icon{
+    color: #000000;
+  }
 }
 </style>
